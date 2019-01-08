@@ -46,7 +46,7 @@ export interface UpdateExpression {
 
 export interface UnaryExpression {
     type: 'UnaryExpression';
-    operator: '+' | '-' | '~' | '!' | 'delete' | 'void' | 'typeof';
+    operator: '+' | '-';
     argument: Expression;
     prefix: true;
     loc: SourceLocation;

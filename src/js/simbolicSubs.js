@@ -108,6 +108,8 @@ function parseExpression2(table, expression) {
     case 'ArrayExpression':
         parseArrayExpression(table, expression);
         return expression;
+    case 'UnaryExpression':
+        return expression;
     }
 }
 

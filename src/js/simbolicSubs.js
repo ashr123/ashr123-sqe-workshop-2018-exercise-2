@@ -91,7 +91,7 @@ function parseIfStatement(table, statement) {
 
 function parseReturnStatement(table, statement) {
     if (statement.argument !== null)
-        parseExpression(table, statement.argument);
+        statement.argument = parseExpression(table, statement.argument);
 }
 
 function parseWhileStatement(table, statement) {

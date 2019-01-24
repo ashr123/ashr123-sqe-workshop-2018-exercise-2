@@ -622,6 +622,76 @@ describe('The javascript parser', () => {
         });
     });
 
+    it('testing deepEqual ' +
+        '\'function foo(x) {\n' +
+        '    let a = x;\n' +
+        '    if (a === -1)\n' +
+        '        return true;\n' +
+        '}\'', () => {
+        assert.deepEqual(codeAnalyzer.parseCode('function foo(x) {\n' +
+            '    let a = x;\n' +
+            '    if (a === -1)\n' +
+            '        return true;\n' +
+            '}', '-1'), {
+            'type': 'Program',
+            'body': [
+                {
+                    'type': 'FunctionDeclaration',
+                    'id': {
+                        'type': 'Identifier',
+                        'name': 'foo'
+                    },
+                    'params': [
+                        {
+                            'type': 'Identifier',
+                            'name': 'x'
+                        }
+                    ],
+                    'body': {
+                        'type': 'BlockStatement',
+                        'body': [
+                            {
+                                'type': 'IfStatement',
+                                'test': {
+                                    'type': 'BinaryExpression',
+                                    'operator': '===',
+                                    'left': {
+                                        'type': 'Identifier',
+                                        'name': 'x'
+                                    },
+                                    'right': {
+                                        'type': 'UnaryExpression',
+                                        'operator': '-',
+                                        'argument': {
+                                            'type': 'Literal',
+                                            'value': 1,
+                                            'raw': '1'
+                                        },
+                                        'prefix': true
+                                    },
+                                    'modifiedText': '<markLightGreen>x === -1</markLightGreen>'
+                                },
+                                'consequent': {
+                                    'type': 'ReturnStatement',
+                                    'argument': {
+                                        'type': 'Literal',
+                                        'value': true,
+                                        'raw': 'true'
+                                    }
+                                },
+                                'alternate': null
+                            }
+                        ]
+                    },
+                    'generator': false,
+                    'expression': false,
+                    'async': false
+                }
+            ],
+            'sourceType': 'script'
+        });
+    });
+
     // it('testing deepStrictEqual ' +
     //     '\'let a=4;\n' +
     //     'a;\n' +
